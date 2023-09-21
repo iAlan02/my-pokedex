@@ -20,7 +20,10 @@ trigger:
 ---
 kind: pipeline
 type: docker
-name: QA
+name: qa
+
+depends_on:
+  - Test
 
 platform:
   os: linux
@@ -30,7 +33,7 @@ steps:
   - name: write
     image: ubuntu
     commands: 
-    - echo ´Promoted by ${name}!´
+    - echo ${name}
 
 trigger:
     branch: 
