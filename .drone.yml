@@ -10,39 +10,60 @@ platform:
 steps:
   - name: write
     image: ubuntu
-    commands: 
-    - echo "Hello world!"
+    commands:
+      - echo "Hello world!"
 
-trigger:
-    branch: 
-    - master
-
----
-kind: pipeline
-type: docker
-name: qa
-
-depends_on:
-  - Test
-
-platform:
-  os: linux
-  arch: amd64
-
-steps:
-  - name: write
+  - name: promote qa
     image: ubuntu
-    commands: 
-    - echo ${name}
+    commands:
+      - echo "Promoting to qa"
+    when:
+      event:
+        - promote
+      target:
+        - qa
+    depends_on:
+      - Test
+
+  - name: promote prod
+    image: ubuntu
+    commands:
+      - echo "Promoting to prod"
+    when:
+      event:
+        - promote
+      target:
+        - prod
+    depends_on:
+      - Test
+      - qa
 
 trigger:
-    branch: 
+  branch:
     - master
-    event:
-    - promote
-    target:
-    - qa
-    environment:
-      name: alan 
 
-    
+# ---
+# kind: pipeline
+# type: docker
+# name: qa
+
+# depends_on:
+#   - Test
+
+# platform:
+#   os: linux
+#   arch: amd64
+
+# steps:
+#   - name: write
+#     image: ubuntu
+#     commands:
+#       - echo "Promoted to qa"
+
+# trigger:
+#   branch:
+#     - master
+#   event:
+#     - promote
+#   target:
+#     - qa
