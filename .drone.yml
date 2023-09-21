@@ -23,7 +23,7 @@ steps:
       target:
         - qa
     depends_on:
-      - Test
+      - write
 
   - name: promote prod
     image: ubuntu
@@ -35,7 +35,7 @@ steps:
       target:
         - prod
     depends_on:
-      - Test
+      - write
       - qa
 
 trigger:
