@@ -36,7 +36,7 @@ steps:
         - prod
     depends_on:
       - write
-      - qa
+      - promote qa
 
 trigger:
   branch:
