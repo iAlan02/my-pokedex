@@ -16,3 +16,28 @@ steps:
 trigger:
     branch: 
     - master
+
+---
+kind: pipeline
+type: docker
+name: QA
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+  - name: write
+    image: ubuntu
+    commands: 
+    - echo "Promoted!"
+
+trigger:
+    branch: 
+    - master
+    event:
+    - promote
+    target:
+    - QA
+
+    
