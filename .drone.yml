@@ -11,7 +11,7 @@ steps:
   - name: write
     image: ubuntu
     commands: 
-    - echo "hello world"
+    - echo "hello world!"
 
 trigger:
     branch: 
