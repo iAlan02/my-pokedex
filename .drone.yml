@@ -30,7 +30,7 @@ steps:
   - name: write
     image: ubuntu
     commands: 
-    - echo "Promoted!"
+    - echo "Promoted by ${name}!"
 
 trigger:
     branch: 
@@ -38,6 +38,8 @@ trigger:
     event:
     - promote
     target:
-    - QA
+    - qa
+    environment:
+      name: alan 
 
     
