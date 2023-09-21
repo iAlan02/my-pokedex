@@ -30,7 +30,7 @@ steps:
   - name: write
     image: ubuntu
     commands: 
-    - echo "Promoted by ${name}!"
+    - echo ´Promoted by ${name}!´
 
 trigger:
     branch: 
