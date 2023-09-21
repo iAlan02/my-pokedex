@@ -35,8 +35,8 @@ steps:
       target:
         - prod
     depends_on:
-      - write
       - promote qa
+      - write
 
 trigger:
   branch:
