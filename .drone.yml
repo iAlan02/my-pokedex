@@ -13,57 +13,57 @@ steps:
     commands:
       - echo "Hello world again!"
 
-  - name: promote qa
-    image: ubuntu
-    commands:
-      - echo "Promoting to qa"
-    when:
-      event:
-        - promote
-      target:
-        - qa
-    depends_on:
-      - write
+  # - name: promote qa
+  #   image: ubuntu
+  #   commands:
+  #     - echo "Promoting to qa"
+  #   when:
+  #     event:
+  #       - promote
+  #     target:
+  #       - qa
+  #   depends_on:
+  #     - write
 
-  - name: promote prod
-    image: ubuntu
-    commands:
-      - echo "Promoting to prod"
-    when:
-      event:
-        - promote
-      target:
-        - prod
-    depends_on:
-      - promote qa
-      - write
+  # - name: promote prod
+  #   image: ubuntu
+  #   commands:
+  #     - echo "Promoting to prod"
+  #   when:
+  #     event:
+  #       - promote
+  #     target:
+  #       - prod
+  #   depends_on:
+  #     - promote qa
+  #     - write
 
 trigger:
   branch:
     - master
 
-# ---
-# kind: pipeline
-# type: docker
-# name: qa
+---
+kind: pipeline
+type: docker
+name: qa
 
-# depends_on:
-#   - Test
+depends_on:
+  - Test
 
-# platform:
-#   os: linux
-#   arch: amd64
+platform:
+  os: linux
+  arch: amd64
 
-# steps:
-#   - name: write
-#     image: ubuntu
-#     commands:
-#       - echo "Promoted to qa"
+steps:
+  - name: write
+    image: ubuntu
+    commands:
+      - echo "Promoted to qa"
 
-# trigger:
-#   branch:
-#     - master
-#   event:
-#     - promote
-#   target:
-#     - qa
+trigger:
+  branch:
+    - master
+  event:
+    - promote
+  target:
+    - qa
