@@ -13,23 +13,23 @@ environment:
 
 steps:
   - name: set_prod
-    image: ubuntu
+    image: alpine
     commands:
     - echo "MY_ENV_VAR=$$PROD" > sourcme
 
   - name: write
-    image: ubuntu
+    image: alpine
     commands:
       - source sourcme
       - echo "Hello world again from $MY_ENV_VAR!"
 
   - name: set_arch
-    image: ubuntu
+    image: alpine
     commands:
     - echo "MY_ENV_VAR=$$ARCH" > sourcme
 
   - name: promote qa
-    image: ubuntu
+    image: alpine
     commands:
       - source sourcme
       - echo "Hello world again from $MY_ENV_VAR!"
@@ -42,7 +42,7 @@ steps:
       - write
 
   - name: promote prod
-    image: ubuntu
+    image: alpine
     commands:
       - echo "Promoting to prod"
     when:
@@ -72,7 +72,7 @@ trigger:
 
 # steps:
 #   - name: write
-#     image: ubuntu
+#     image: alpine
 #     commands:
 #       - echo "Promoted to qa"
 
