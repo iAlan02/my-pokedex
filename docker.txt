@@ -1,0 +1,27 @@
+docker run \
+  --rm \
+  --volume=$PWD/data:/data \
+  --env=DRONE_GITHUB_CLIENT_ID=b78a5ef63502c5498add \
+  --env=DRONE_GITHUB_CLIENT_SECRET=f9f8e605705ee8b3aa50bedbfe3e970898c1d251 \
+  --env=DRONE_RPC_SECRET=091c8df97f670d36271864a0e40fdcb7 \
+  --env=DRONE_SERVER_HOST=195f-2806-2f0-30c1-fd9c-4cc7-f24f-3e17-7674.ngrok-free.app \
+  --env=DRONE_SERVER_PROTO=https \
+  --publish=80:80 \
+  --detach=true \
+  --name=drone \
+  --network=drone-net \
+  drone/drone
+
+
+  docker run --detach \
+  --rm \
+  --volume=//var/run/docker.sock:/var/run/docker.sock \
+  --env=DRONE_RPC_PROTO=https \
+  --env=DRONE_RPC_HOST=195f-2806-2f0-30c1-fd9c-4cc7-f24f-3e17-7674.ngrok-free.app \
+  --env=DRONE_RPC_SECRET=091c8df97f670d36271864a0e40fdcb7 \
+  --env=DRONE_RUNNER_CAPACITY=2 \
+  --env=DRONE_RUNNER_NAME=my-first-runner \
+  --publish=3000:3000 \
+  --name=runner \
+  --network=drone-net \
+  drone/drone-runner-docker
