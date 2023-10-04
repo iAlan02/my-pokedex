@@ -1,4 +1,4 @@
-local write(env) = {
+/* local write(env) = {
   name: 'write %(env)s' % { env: env }
   image: ubuntu
   commands: 
@@ -44,4 +44,27 @@ local test_pipeline = {
 
 [
 test_pipeline,
-]
+] */
+
+/* A Jsonnet template example. */
+local pipelines =
+{
+  "kind": "pipeline",
+  "type": "docker",
+  "name": "default",
+  "steps": [
+    {
+      "name": stepName,
+      "image": "ubuntu",
+      "commands": [
+         ['echo Hello world!']
+      ]
+    }
+  ]
+}
+
+{
+  kind: 'pipeline',
+  name: 'default',
+  steps: pipelines,
+}
